@@ -2769,7 +2769,7 @@ keyboard.factory('TrackKeyState', function() {
 
 // Handles 'escaping' of modifiers: if a char modifier is used to produce a keysym (such as AltGr-2 to generate an @),
 // then the modifier must be 'undone' before sending the @, and 'redone' afterwards.
-keyboard.factory('EscapeModifiers', function () {
+keyboard.factory('EscapeModifiers', function (keysyms) {
 	'use strict';
 	return function(next) {
 		return function(evt) {
@@ -6970,6 +6970,7 @@ angular.module('noVNC', ['noVNC.util', 'noVNC.rfb']).directive('vnc', ['WebUtil'
 			viewOnly    : '=',
 			trueColor   : '=',
 			isConnected : '=',
+			connected		: '=',
 			display     : '=',
 			style       : '=',
 			states      : '=',
@@ -7043,12 +7044,15 @@ angular.module('noVNC', ['noVNC.util', 'noVNC.rfb']).directive('vnc', ['WebUtil'
 					case 'failed':
 					case 'fatal':
 						Interface.connected = false;
+						scope.connected = false;
 						break;
 					case 'normal':
 						Interface.connected = true;
+						scope.connected = true;
 						break;
 					case 'disconnected':
 						Interface.connected = false;
+						scope.connected = false;
 						break;
 					case 'loaded':
 						// klass = 'noVNC_status_normal';
