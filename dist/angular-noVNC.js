@@ -2769,7 +2769,7 @@ keyboard.factory('TrackKeyState', function() {
 
 // Handles 'escaping' of modifiers: if a char modifier is used to produce a keysym (such as AltGr-2 to generate an @),
 // then the modifier must be 'undone' before sending the @, and 'redone' afterwards.
-keyboard.factory('EscapeModifiers', function (keysyms) {
+keyboard.factory('EscapeModifiers', ['keysyms', function (keysyms) {
 	'use strict';
 	return function(next) {
 		return function(evt) {
@@ -2789,7 +2789,7 @@ keyboard.factory('EscapeModifiers', function (keysyms) {
 			}
 		};
 	};
-});
+}]);
 
 
 
